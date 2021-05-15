@@ -28,8 +28,12 @@ recognition.addEventListener("soundstart", function () {
   console.log("Some sound is being received");
 });
 recognition.addEventListener("speechend", function () {
-  console.log("Some sound has stopped");
+  recognition.start();
 });
+recognition.onend = function () {
+  console.info("voice recognition ended, restarting...");
+  recognition.start();
+};
 const copyPaseText = () => {
   var copyText = document.querySelector("#note").value;
   navigator.clipboard.writeText(copyText).then(
